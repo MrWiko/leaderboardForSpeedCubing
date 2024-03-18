@@ -1,3 +1,9 @@
+:root {
+  --columny: 6;/* trzeba ilosc kolumn zmienic tu i w nth-child */
+}
+.grid-item:nth-child(6n) {
+  border-right: none;
+}
 body {
     background-color: #485696;
     margin-top: 50px;
@@ -26,7 +32,7 @@ body {
   background-color: #bbbbbb62;
     font-size: larger;
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr; /* First two columns are twice as wide */
+    grid-template-columns: 2fr 2fr repeat(calc(var(--columny) - 2), 1fr); /* First two columns are twice as wide */
     /* Customize the number of rows as needed */
     /* grid-template-rows: repeat(3, 100px); Example: 3 rows each 100px tall */
     row-gap: 10px;
@@ -41,7 +47,4 @@ body {
     font-family: "Madimi One", sans-serif;
     font-weight: 400;
     font-style: normal;
-  }
-  .grid-item:nth-child(5n) {
-    border-right: none;
   }
