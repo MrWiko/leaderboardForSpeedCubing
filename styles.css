@@ -1,0 +1,47 @@
+body {
+    background-color: #485696;
+    margin-top: 50px;
+}
+.madimi-one-regular {
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+#tytul{
+    font-family: "Madimi One", sans-serif;
+    font-size: 40px;
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #E7E7E7;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    width: 80%;
+    padding: 40px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+#grid-container {
+  background-color: #bbbbbb62;
+    font-size: larger;
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr; /* First two columns are twice as wide */
+    /* Customize the number of rows as needed */
+    /* grid-template-rows: repeat(3, 100px); Example: 3 rows each 100px tall */
+    row-gap: 10px;
+    border-radius: 20px;
+  }
+  
+  .grid-item {
+    margin: 10px;
+    margin-right: 0;
+    text-align: center;
+    border-right: 2px solid black;
+    font-family: "Madimi One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .grid-item:nth-child(5n) {
+    border-right: none;
+  }
