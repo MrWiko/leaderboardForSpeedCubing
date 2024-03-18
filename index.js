@@ -1,25 +1,51 @@
+function sortByPropertyDesc(array, prop) {
+    return array.sort((a, b) => {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {
+            return -1;
+        } else {
+            return 0;
+        }
+    });
+}
+
 function generateTabel() {
     const tabelaDisplay = document.getElementById('grid-container');
     var contestants = [
         {
             name: "Michal Gmaj",
-            czas1: [new Date(2018, 11, 24, 10, 2, 30, 0), 0,0]
+            czas1: [new Date(2018, 11, 24, 10, 2, 30, 0), 0,0],
+            suma: 0
         },
         {
             name: "Marcin Najman",
-            czas1: [new Date(2018, 11, 24, 11, 3, 30, 0), 0,0]
+            czas1: [new Date(2018, 11, 24, 10, 3, 30, 0), 0,0],
+            suma: 0
         },
         {
             name: "Marcin Nienajman",
-            czas1: [new Date(2018, 11, 24, 20, 4, 30, 0), 0,0]
+            czas1: [new Date(2018, 11, 24, 10, 1, 30, 0), 0,0],
+            suma: 0
         },
         {
             name: "Adam Smasher",
-            czas1: [new Date(2018, 11, 24, 12, 5, 30, 0), 0, 0]
+            czas1: [new Date(2018, 11, 24, 10, 5, 30, 0), 0, 0],
+            suma: 0
         }
     ]
-
+    //przed wpisywaniem do DOMa musi być sortowanie tej tablicy na podstawie sumy czasow(najlepiej w milisekundach bo potem mozna szybko zamienic)
     var timeSum = new Date(0, 0, 0, 0, 0, 0, 0);
+    for(object of contestants){
+        timeSum = 0; 
+        for(times of object.czas1){
+            if(times != 0)
+                timeSum += Date.parse(times);
+        }
+        object.suma = timeSum;
+    }
+
+    sortByPropertyDesc(contestants, 'suma');
 
     for (const object of contestants){
         timeSum = 0;
@@ -42,7 +68,6 @@ function generateTabel() {
                     tempCreator.classList.add('grid-item'); 
                     if(times != 0){
                         tempCreator.innerHTML = times.getMinutes(); 
-                        timeSum += Date.parse(times);
                     }
                     else    
                         tempCreator.innerHTML = '-'; 
@@ -50,7 +75,7 @@ function generateTabel() {
                 }
                 const tempCreator = document.createElement('div');
                 tempCreator.classList.add('grid-item'); 
-                tempCreator.innerHTML = new Date(timeSum).getMinutes(); 
+                tempCreator.innerHTML = new Date(object.suma).getMinutes(); 
                 tabelaDisplay.appendChild(tempCreator);
             }
 
