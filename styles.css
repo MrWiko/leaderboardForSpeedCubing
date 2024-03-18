@@ -26,7 +26,7 @@ body {
   background-color: #bbbbbb62;
     font-size: larger;
     display: grid;
-    grid-template-columns: 2fr 2fr 1fr 1fr 1fr; /* First two columns are twice as wide */
+    grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr; /* First two columns are twice as wide */
     /* Customize the number of rows as needed */
     /* grid-template-rows: repeat(3, 100px); Example: 3 rows each 100px tall */
     row-gap: 10px;
