@@ -5,46 +5,78 @@
   border-right: none;
 }
 body {
-    background-color: #485696;
+    background-color: #FDFFFC;
     margin-top: 50px;
+    overflow: hidden;
 }
 .madimi-one-regular {
     font-family: "Madimi One", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
-#tytul{
-    font-family: "Madimi One", sans-serif;
-    font-size: 40px;
+.voces-regular {
+  font-family: "Voces", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
-.container {
+
+#tytul{
+    font-family: "Voces", sans-serif;
+    font-size: 60px;
+    margin: 0;
+    width: 90%;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
-    background-color: #E7E7E7;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    width: 80%;
+}
+#tytulText{
+  background-color: #efefef;
+  padding: 20px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.container {
+  z-index: 50;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: #011627; */
+    background-color: #efefef; 
+    border-radius: 15px;
+    width: 90%;
     padding: 40px;
-    padding-bottom: 60px;
     text-align: center;
+    -webkit-box-shadow: 16px 16px 0px 5px #131313;
+    -moz-box-shadow: 16px 16px 0px 5px #131313;
+    box-shadow: 16px 16px 0px 5px #131313;
 }
 #grid-container {
-  background-color: #bbbbbb62;
-    font-size: larger;
+    background-color: #FF9F1C;
+    font-size: 30px;
     display: grid;
-    grid-template-columns: 2fr 2fr repeat(calc(var(--columny) - 2), 1fr); /* First two columns are twice as wide */
+    grid-template-columns: 1fr;
+    /* grid-template-columns: 2fr 2fr repeat(calc(var(--columny) - 2), 1fr); First two columns are twice as wide */
     /* Customize the number of rows as needed */
     /* grid-template-rows: repeat(3, 100px); Example: 3 rows each 100px tall */
     row-gap: 10px;
     border-radius: 20px;
   }
-  
+  .row-container{
+    display: grid;
+    grid-template-columns: 2fr 2fr repeat(calc(var(--columny) - 2), 1fr);;
+  }
+  .row-container:first-child {
+    font-size: 35px;
+    background-color: #ff9603;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom: #011627 solid 2px;
+  }
   .grid-item {
     margin: 10px;
-    margin-right: 0;
+    padding-right: 10px;
     text-align: center;
     border-right: 2px solid black;
-    font-family: "Madimi One", sans-serif;
+    font-family: "Voces", sans-serif;
     font-weight: 400;
     font-style: normal;
   }
