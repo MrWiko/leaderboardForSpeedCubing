@@ -1,13 +1,21 @@
 :root {
-  --columny: 6;/* trzeba ilosc kolumn zmienic tu i w nth-child */
+  --columny: 5;/* trzeba ilosc kolumn zmienic tu i w nth-child */
+  --body_clr: #fbfbfb;
+  --container_clr: #e0e0e0;
+  --row_clr: #ff9747;
+  --first_row_clr: #ff7000;
+  --shadow_clr: #001f37;
 }
-.grid-item:nth-child(6n) {
+.grid-item:nth-child(5n) {
   border-right: none;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 body {
-    background-color: #FDFFFC;
+    background-color: var(--body_clr);
     margin-top: 50px;
-    overflow: hidden;
+    margin-bottom: 50px;
 }
 .madimi-one-regular {
     font-family: "Madimi One", sans-serif;
@@ -30,7 +38,7 @@ body {
     margin-right: auto;
 }
 #tytulText{
-  background-color: #efefef;
+  background-color: var(--container_clr);
   padding: 20px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -40,17 +48,17 @@ body {
     margin-left: auto;
     margin-right: auto;
     /* background-color: #011627; */
-    background-color: #efefef; 
+    background-color: var(--container_clr); 
     border-radius: 15px;
     width: 90%;
     padding: 40px;
     text-align: center;
-    -webkit-box-shadow: 16px 16px 0px 5px #131313;
-    -moz-box-shadow: 16px 16px 0px 5px #131313;
-    box-shadow: 16px 16px 0px 5px #131313;
+    -webkit-box-shadow: 16px 16px 0px 5px var(--shadow_clr);
+    -moz-box-shadow: 16px 16px 0px 5px var(--shadow_clr);
+    box-shadow: 16px 16px 0px 5px var(--shadow_clr);
 }
 #grid-container {
-    background-color: #FF9F1C;
+    background-color: var(--row_clr);
     font-size: 30px;
     display: grid;
     grid-template-columns: 1fr;
@@ -64,9 +72,16 @@ body {
     display: grid;
     grid-template-columns: 2fr 2fr repeat(calc(var(--columny) - 2), 1fr);;
   }
+  .bar-row-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: var(--first_row_clr);
+    border-bottom: #011627 solid 2px;
+    border-top: #011627 solid 2px;
+  }
   .row-container:first-child {
     font-size: 35px;
-    background-color: #ff9603;
+    background-color: var(--first_row_clr);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom: #011627 solid 2px;
@@ -80,3 +95,9 @@ body {
     font-weight: 400;
     font-style: normal;
   }
+  .bar-row-container > .grid-item {
+    border-right: 0;
+  }
+.logo {
+  margin-bottom: 40px;
+}
