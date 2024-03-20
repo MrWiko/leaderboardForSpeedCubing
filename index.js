@@ -1,74 +1,74 @@
-const barOfNextRound = 4; 
-
-function sortByPropertyDesc(array, prop) {
-  return array.sort((a, b) => {
-    if (a[prop] > b[prop]) {
-      return 1;
-    } else if (a[prop] < b[prop]) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-}
-
+const barOfNextRound = 4; //polfinal = 30, final = 10
+const pauseTimeAtBottomTop = 500; 
 function generateTabel() {
   const tabelaDisplay = document.getElementById("grid-container");
   var contestants = [
     {
       name: "Michal Gmaj",
-      czas1: ['2018-11-24T00:05:31.032Z', '2018-11-24T00:05:31.032Z'],
+      czas: ['2018-11-24T00:05:31.030Z', '2018-11-24T00:00:00.002Z'],
       suma: 0,
     },
     {
       name: "Damian Gmajowski",
-      czas1: ['2018-11-24T00:05:31.032Z', 0],
+      czas: ['2018-11-24T00:05:31.032Z', 0],
       suma: 0,
     },
     {
       name: "Kajetan Gmajek",
-      czas1: ['2018-11-24T00:05:31.032Z', 0],
+      czas: ['2018-11-24T00:05:31.032Z', 0],
       suma: 0,
     },
     {
       name: "Basia Gmajkowska",
-      czas1: ['2018-11-24T00:05:31.032Z', 0],
+      czas: ['2018-11-24T00:05:31.032Z', 0],
       suma: 0,
     },
     {
       name: "Darek Gmajujek",
-      czas1: ['2018-11-24T00:05:31.032Z', 0], // dziala dla takiego formatu
+      czas: ['2018-11-24T00:05:31.032Z', 0],
       suma: 0,
     },
     {
       name: "Marcin Najman",
-      czas1: ['2018-11-24T00:05:31.032Z', 0],
+      czas: ['2018-11-24T00:05:31.032Z', 0],
       suma: 0,
     },
     {
       name: "Tymek Nienajman",
-      czas1: ['2018-11-24T00:05:31.012Z', 0],
+      czas: ['2018-11-24T00:05:31.012Z', 0],
       suma: 0,
     },
     {
       name: "Adam Smasher",
-      czas1: ['2018-11-24T00:05:31.022Z', 0],
+      czas: ['2018-11-24T00:05:31.022Z', 0],
       suma: 0,
     },
   ];
-  //przed wpisywaniem do DOMa musi być sortowanie tej tablicy na podstawie sumy czasow(najlepiej w milisekundach bo potem mozna szybko zamienic)
+  var maxTimeOfObject, minTimeOfObject, visitedMax = false, visitedMin = false;
   var timeSum = new Date(0, 0, 0, 0, 0, 0, 0);
   for (object of contestants) {
+    maxTimeOfObject = maxTime(object.czas);
+    minTimeOfObject = minTime(object.czas);
+    visitedMax = false;
+    visitedMin = false; 
     timeSum = 0;
-    for (times of object.czas1) {
-      if (times != 0) timeSum += Date.parse(times);
+    for (times of object.czas) {
+      if(times != 0){
+        timeSum += Date.parse(times);
+        //   if ((Date.parse(times) != maxTimeOfObject || visitedMax == true) && (Date.parse(times) != minTimeOfObject || visitedMin == true))
+        //     timeSum += Date.parse(times);
+        // else{
+        //   if(Date.parse(times) == maxTimeOfObject && visitedMax == false) visitedMax == false;
+        //   else if(Date.parse(times) == minTimeOfObject && visitedMin == false) visitedMin == false;
+        // }
+      }
     }
-    object.suma = timeSum; // mozliwe ze trzeba uzywac getTime() zeby dostac milisekundy
+    object.suma = timeSum;
   }
 
   sortByPropertyDesc(contestants, "suma");
 
-  var tempMins, tempSecs, tempMilisecs, tmpWhichRow = 1;
+  var tempMins, tempSecs, tempMilisecs, tempMilisecs2, tmpWhichRow = 1;
 
   for (const object of contestants) {
     timeSum = 0;
@@ -84,7 +84,7 @@ function generateTabel() {
       tempCreator.innerHTML = object.name.split(" ")[1];
       tempContainerCreator.appendChild(tempCreator);
 
-      for (times of object.czas1) {//czasy
+      for (times of object.czas) {//czasy
         tempCreator = document.createElement("div");
         tempCreator.classList.add("grid-item");
         if (times != 0) {
@@ -92,9 +92,13 @@ function generateTabel() {
             tempSecs = new Date(times).getSeconds();
             tempMilisecs = new Date(times).getMilliseconds();
             if(tempMins < 10)
-                tempMins = "0" + new Date(times).getMinutes()
+                tempMins = "0" + new Date(times).getMinutes();
             if(tempSecs < 10)
-                tempSecs = "0" + new Date(times).getSeconds()
+                tempSecs = "0" + new Date(times).getSeconds();
+            if(tempMilisecs < 100)
+                tempMilisecs = "0" + new Date(times).getMilliseconds();
+            if(tempMilisecs < 10)
+                tempMilisecs = "00" + new Date(times).getMilliseconds();
 
           tempCreator.innerHTML = tempMins  + ":" + tempSecs + "." + tempMilisecs;
         } else tempCreator.innerHTML = "-";
@@ -105,11 +109,16 @@ function generateTabel() {
       tempCreator.classList.add("grid-item");
         tempMins = new Date(object.suma).getMinutes();
         tempSecs = new Date(object.suma).getSeconds();
-        tempMilisecs = new Date(object.suma).getMilliseconds();
+        tempMilisecs2 = new Date(object.suma);
+        tempMilisecs = tempMilisecs2.getMilliseconds();
         if(tempMins < 10)
-            tempMins = "0" + new Date(object.suma).getMinutes()
+            tempMins = "0" + new Date(object.suma).getMinutes();
         if(tempSecs < 10)
-            tempSecs = "0" + new Date(object.suma).getSeconds()
+            tempSecs = "0" + new Date(object.suma).getSeconds();
+         if(tempMilisecs < 100)
+             tempMilisecs = "0" + tempMilisecs2.getMilliseconds();
+         if(tempMilisecs < 10)
+             tempMilisecs = "00" + new Date(times).getMilliseconds();
         
       tempCreator.innerHTML = tempMins + ":" + tempSecs + "." + tempMilisecs;
       tempContainerCreator.appendChild(tempCreator);
@@ -125,7 +134,20 @@ function generateTabel() {
       }
       tmpWhichRow++;
     }
+    //setTimeout(function() {scrollDown()}, pauseTimeAtBottomTop);
   }
+
+function sortByPropertyDesc(array, prop) {
+  return array.sort((a, b) => {
+    if (a[prop] > b[prop]) {
+      return 1;
+    } else if (a[prop] < b[prop]) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+}
 
 function minTime(array){
   var result = 8640000000000000; 
@@ -143,13 +165,22 @@ function maxTime(array){
   }
   return result; 
 }
-// jeszcze trzeba dodac custom liczbe czasow wsn przeszukiwanie tablicy od czas1 i sumowanie z sortem
-/*const unixTimeZero = Date.parse('2024-04-19T00:05:31.022Z'); dzialajace displaying milliseconds
-const javaScriptRelease = Date.parse('04 Dec 1995 00:12:00.02 GMT');
-const d = new Date(unixTimeZero).getMilliseconds();
 
-console.log(d);
-// Expected output: 22
+function scrollDown() {
+  window.scrollBy({
+      top: window.innerHeight, // Scroll down by the height of the viewport
+      behavior: 'smooth', // Smooth scrolling
+      duration: 2000 // Duration of smooth scrolling animation in milliseconds (2000ms = 2 seconds)
+  });
+  setTimeout(function() {scrollUp()}, pauseTimeAtBottomTop);
+}
 
-console.log(javaScriptRelease);
-// Expected output: 818035920000*/
+// Function to smoothly scroll up
+function scrollUp() {
+  window.scrollBy({
+      top: -window.innerHeight, // Scroll up by the height of the viewport
+      behavior: 'smooth', // Smooth scrolling
+      duration: 2000 // Duration of smooth scrolling animation in milliseconds (2000ms = 2 seconds)
+  });
+  setTimeout(function() {scrollDown()}, pauseTimeAtBottomTop);
+}
