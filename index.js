@@ -71,6 +71,10 @@ function generateTabel() {
   var tempMins, tempSecs, tempMilisecs, tempMilisecs2, tmpWhichRow = 1;
 
   for (const object of contestants) {
+    maxTimeOfObject = maxTime(object.czas);
+    minTimeOfObject = minTime(object.czas);
+    visitedMax = false;
+    visitedMin = false; 
     timeSum = 0;
     var tempContainerCreator = document.createElement("div");
     tempContainerCreator.classList.add("row-container");
@@ -88,6 +92,14 @@ function generateTabel() {
         tempCreator = document.createElement("div");
         tempCreator.classList.add("grid-item");
         if (times != 0) {
+          // if(Date.parse(times) == maxTimeOfObject && visitedMax == false){
+          //   visitedMax = true;
+          //   tempCreator.style.textDecoration = 'underline red';
+          // }
+          // if(Date.parse(times) == minTimeOfObject && visitedMin == false){
+          //   visitedMin = true;
+          //   tempCreator.style.textDecoration = 'underline red';
+          // }
             tempMins = new Date(times).getMinutes();
             tempSecs = new Date(times).getSeconds();
             tempMilisecs = new Date(times).getMilliseconds();
